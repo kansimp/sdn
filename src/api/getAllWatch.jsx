@@ -2,15 +2,14 @@
 import axios from 'axios';
 
 const getAllWatch = async () => {
-  try {
-    const response = await axios.get("http://localhost:8080/watches");
-    console.log(response.data);
-    if(response.data.succes){
-        return response?.data.watchesList;
+    try {
+        const response = await axios.get('http://localhost:5000/watches');
+        if (response?.data) {
+            return response?.data;
+        }
+    } catch (error) {
+        throw error.response?.data || { message: 'Unknown error' };
     }
-  } catch (error) {
-    throw error.response?.data || { message: "Unknown error" };
-  }
 };
 
 export default getAllWatch;

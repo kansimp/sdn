@@ -54,8 +54,8 @@ export default function Login() {
             localStorage.clear();
             const response = await loginApi(formValues.username, formValues.password);
             if (response.status == 'success') {
-                localStorage.setItem('name', response?.data.name);
-                if (response.data.isAdmin) navigate('/admin');
+                localStorage.setItem('user', JSON.stringify(response?.data));
+                if (response.data.isAdmin) navigate('/admin/brands');
                 else navigate('/home');
             } else {
                 // Handle login failure

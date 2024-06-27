@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -24,7 +25,11 @@ const validationSchema = Yup.object({
     brandName: Yup.string().required('Brand Name is required'),
 });
 
-export default function AddBrandModal({ open, handleClose }) {
+const handleAdd = async (values) => {
+    const res = await axios.post('http://localhost:5000/brands', { brandName: values.brandName });
+};
+
+export default function AddBrandModal({ open, handleClose, setFlag, flag }) {
     const formik = useFormik({
         initialValues: {
             brandName: '',
@@ -32,8 +37,9 @@ export default function AddBrandModal({ open, handleClose }) {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             // Handle form submission
-            console.log(values);
-            // handleClose();
+            handleAdd(values);
+            handleClose();
+            setFlag(flag + 1);
         },
     });
 

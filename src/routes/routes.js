@@ -6,6 +6,7 @@ import Register from '../pages/Register/Register';
 import Profile from '../atom/profile/Profile';
 import Admin from '../pages/Admin/Admin';
 import ListBrands from '../pages/ListBrands/ListBrands';
+import BrandListWatch from '../pages/BrandListWatch/BrandListWatch';
 // import Dashboard from "@components/page/Dashboard";
 // import StudentList from "@components/page/StudentList";
 // import StudentInfo from "@components/page/StudentInfo";
@@ -37,7 +38,15 @@ const userRoutes = [
         component: Homepage,
     },
     {
-        path: '/product',
+        path: '/brand/:brandName',
+        component: BrandListWatch,
+    },
+    {
+        path: '/info',
+        component: Profile,
+    },
+    {
+        path: '/product/:id',
         component: ProductDetail,
     },
 ];

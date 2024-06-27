@@ -5,8 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
+import axios from 'axios';
 
-export default function Moreicon({ open, handleClose, handleOpen }) {
+export default function Moreicon({ open, handleClose, handleOpen, brandId, setBrandId, setFlag, flag }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const openMenu = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -14,6 +15,10 @@ export default function Moreicon({ open, handleClose, handleOpen }) {
     };
     const handleCloseMenu = () => {
         setAnchorEl(null);
+    };
+    const handleDelete = async () => {
+        console.log('brandId', brandId);
+        const res = await axios.delete(`http://localhost:5000/brands?brandId=${brandId}`);
     };
 
     return (
@@ -40,6 +45,7 @@ export default function Moreicon({ open, handleClose, handleOpen }) {
                     onClick={() => {
                         handleOpen();
                         handleCloseMenu();
+                        setBrandId(brandId);
                     }}
                 >
                     <EditIcon className="mr-6" style={{ color: 'green' }} />
@@ -47,6 +53,8 @@ export default function Moreicon({ open, handleClose, handleOpen }) {
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
+                        handleDelete();
+                        setFlag(flag + 1);
                         handleCloseMenu();
                     }}
                 >

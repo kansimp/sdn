@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import getAllWatch from '../../api/getAllWatch';
 import FilterBar from '../../atom/filterBar/FilterBar';
 import { useState, useEffect } from 'react';
-export default function Homepage() {
+import axios from 'axios';
+export default function BrandListWatch() {
+    const { brandName } = useParams();
     const [watchesList, setWatchList] = useState([]);
 
     const fetchApi = async () => {
         try {
-            const response = await getAllWatch();
-            setWatchList(response.data);
+            const response = await axios.get(`http://localhost:5000/watches/filter?brandName=${brandName}`);
+            setWatchList(response.data.data);
         } catch (error) {
             console.log(error);
         }
@@ -17,7 +19,7 @@ export default function Homepage() {
 
     useEffect(() => {
         fetchApi();
-    }, []);
+    }, [brandName]);
 
     return (
         <div className="lg:mt-0 lg:px-2 lg:w-5/5 ">

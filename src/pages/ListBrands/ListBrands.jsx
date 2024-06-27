@@ -10,6 +10,9 @@ import UpdateBrandModal from '../../atom/UpdateBrandModal/UpdateBrandModal';
 function ListBrands() {
     const [openAdd, setOpenAdd] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
+    const [flag, setFlag] = useState(0);
+    const [brandId, setBrandId] = useState('');
+
     return (
         <>
             <div className="text-4xl font-sans font-semibold">Brands Management</div>
@@ -51,13 +54,23 @@ function ListBrands() {
             </div>
             <div className="mt-8">
                 <TableListBrands
+                    flag={flag}
+                    setFlag={setFlag}
                     open={openUpdate}
                     handleClose={() => setOpenUpdate(false)}
                     handleOpen={() => setOpenUpdate(true)}
+                    brandId={brandId}
+                    setBrandId={setBrandId}
                 />
             </div>
-            <AddBrandModal open={openAdd} handleClose={() => setOpenAdd(false)} />
-            <UpdateBrandModal open={openUpdate} handleClose={() => setOpenUpdate(false)} />
+            <AddBrandModal open={openAdd} handleClose={() => setOpenAdd(false)} setFlag={setFlag} flag={flag} />
+            <UpdateBrandModal
+                open={openUpdate}
+                handleClose={() => setOpenUpdate(false)}
+                setFlag={setFlag}
+                flag={flag}
+                brandId={brandId}
+            />
         </>
     );
 }

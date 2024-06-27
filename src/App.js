@@ -12,7 +12,7 @@ export default function App() {
             <BrowserRouter>
                 <SidebarProvider>
                     <Routes>
-                        <Route path="/" element={<Navigate to="/login" replace />} />
+                        <Route path="/" element={<Navigate to="/home" replace />} />
                         {publicRoutes.map((item, index) => {
                             const Page = item.component;
                             return <Route key={index} path={item.path} element={<Page />} />;
